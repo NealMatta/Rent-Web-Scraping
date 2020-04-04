@@ -1,3 +1,5 @@
+# Will complete once moved to new apartment
+
 from selenium import webdriver
 from variables import *
 import time
@@ -5,16 +7,12 @@ import time
 # Global variable
 driver = webdriver.Firefox()
 
+# Calculates my share of rent
+
 
 def calculateMyRent(rent):
 
     baseRent = 700
-    # From the home page, navigate to payments tab
-    driver.find_element_by_xpath(
-        '/html/body/div[2]/div/div/div[1]/ul/li[3]/a').click()
-    # Open the Balance History tab
-    driver.find_element_by_xpath('//*[@id="bal-hist"]').click()
-
     # Just need to calculate utilities and add those values up. Then can either return that amount or pay it
 
 
@@ -53,13 +51,11 @@ def main():
     login()
     rent = determineRent()
 
-    calculateMyRent(rent)
-
-    # if (rent == '$0.00'):
-    #     print("No rent to pay!")
-    # else:
-    #     print(rent)
-    #     calculateMyRent()
+    if (rent == '$0.00'):
+        print("No rent to pay!")
+    else:
+        print(rent)
+        calculateMyRent(rent)
 
     # Close the page
     driver.close()
