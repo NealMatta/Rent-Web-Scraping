@@ -1,0 +1,5 @@
+1. Install the following packages:
+	- beautifulsoup4
+	- lxml
+	- requests
+
