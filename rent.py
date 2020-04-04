@@ -6,6 +6,19 @@ import time
 driver = webdriver.Firefox()
 
 
+def calculateMyRent(rent):
+
+    baseRent = 700
+    # From the home page, navigate to payments tab
+    driver.find_element_by_xpath(
+        '/html/body/div[2]/div/div/div[1]/ul/li[3]/a').click()
+    # Open the Balance History tab
+    driver.find_element_by_xpath('//*[@id="bal-hist"]').click()
+
+    # Just need to calculate utilities and add those values up. Then can either return that amount or pay it
+
+
+# Returns the total rent to be paid
 def determineRent():
     elemLoaded = False
 
@@ -18,6 +31,8 @@ def determineRent():
             return payAmount.text
         except:
             pass
+
+# Logs into the website
 
 
 def login():
@@ -38,10 +53,13 @@ def main():
     login()
     rent = determineRent()
 
-    if (rent == '$0.00'):
-        print("No rent to pay!")
-    else:
-        print(rent)
+    calculateMyRent(rent)
+
+    # if (rent == '$0.00'):
+    #     print("No rent to pay!")
+    # else:
+    #     print(rent)
+    #     calculateMyRent()
 
     # Close the page
     driver.close()
