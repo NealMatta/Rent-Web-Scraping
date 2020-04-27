@@ -32,6 +32,11 @@ def determineRent():
             timeElapsed += 1
             pass
 
+    if (timeElapsed > 10) {
+        print("The page took too long to render. Try again later")
+        exit()
+    }
+
 # Logs into the website
 
 
