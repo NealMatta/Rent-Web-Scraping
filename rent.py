@@ -19,15 +19,17 @@ def calculateMyRent(rent):
 # Returns the total rent to be paid
 def determineRent():
     elemLoaded = False
-
-    while not elemLoaded:
+    timeElapsed = 0
+    while not elemLoaded or timeElapsed > 10:
         # Waiting for the page to finish rendering
         try:
             payAmount = driver.find_element_by_xpath(
-                '/html/body/div[2]/div/div/div[8]/div[1]/div[1]/div[1]/span[2]')
+                '/html/body/div/section/div/div/div[8]/div[1]/div[1]/div[1]/span[2]')
             elemLoaded = True
             return payAmount.text
         except:
+            time.sleep(1)
+            timeElapsed += 1
             pass
 
 # Logs into the website
