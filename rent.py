@@ -15,36 +15,57 @@ def calculateMyRent(rent):
 
 # Returns the total rent to be paid
 def determineRent():
-    elemLoaded = False
+    homePageLoaded = False
+    paymentPageLoaded = False
     timeElapsed = 0
-    while not elemLoaded or timeElapsed > 10:
-        # Waiting for the page to finish rendering
+
+    # Directing to payment page
+    while not homePageLoaded or timeElapsed > 10:
         try:
-            payAmount = driver.find_element_by_xpath(
-                '/html/body/div/section/div/div/div[8]/div[1]/div[1]/div[1]/span[2]')
-            elemLoaded = True
-            return payAmount.text
+            driver.find_element_by_xpath(
+                '//*[@id="paymentsaspx_MenuLink"]').click()
+            homePageLoaded = True
+            timeElapsed = 0
+
         except:
             time.sleep(1)
             timeElapsed += 1
             pass
 
     if (timeElapsed > 10):
-        print("The page took too long to render. Try again later")
+        print("The home page took too long to render. Try again later")
+        exit()
+
+    # Grabbing the amount due
+    while not paymentPageLoaded or timeElapsed > 10:
+        try:
+            payAmount = driver.find_element_by_xpath(
+                '//*[@id="PP2MakePayments"]/div[1]/div/div/div[1]/div[1]/h2/b')
+            paymentPageLoaded = True
+            return payAmount.text
+
+        except:
+            time.sleep(1)
+            print('Payment page rendering {}'.format(timeElapsed))
+            timeElapsed += 1
+            pass
+
+    if (timeElapsed > 10):
+        print("The payment page took too long to render. Try again later")
         exit()
 
 
 # Logs into the website
 def login():
     # Grabbing the username and password fields
-    inputUsername = driver.find_element_by_xpath('//*[@id="email"]')
-    inputPassword = driver.find_element_by_xpath('//*[@id="password"]')
+    inputUsername = driver.find_element_by_xpath('//*[@id="Username"]')
+    inputPassword = driver.find_element_by_xpath('//*[@id="Password"]')
 
     # Inputing the username and passwords
     inputUsername.send_keys(USERNAME_SECRET)
     inputPassword.send_keys(PASSWORD_SECRET)
     # Submitting the fields
-    driver.find_element_by_xpath('//*[@id="submit-button"]').click()
+    driver.find_element_by_xpath('//*[@id="SignIn"]').click()
 
 
 def main():
