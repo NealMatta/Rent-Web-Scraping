@@ -1,17 +1,14 @@
 # Will complete once moved to new apartment
-
-from selenium import webdriver
+from selenium import webdriver  # pylint: disable=import-error
 from variables import *
 import time
 
 # Global variable
 driver = webdriver.Firefox()
 
+
 # Calculates my share of rent
-
-
 def calculateMyRent(rent):
-
     baseRent = 700
     # Just need to calculate utilities and add those values up. Then can either return that amount or pay it
 
@@ -32,14 +29,12 @@ def determineRent():
             timeElapsed += 1
             pass
 
-    if (timeElapsed > 10) {
+    if (timeElapsed > 10):
         print("The page took too long to render. Try again later")
         exit()
-    }
+
 
 # Logs into the website
-
-
 def login():
     # Grabbing the username and password fields
     inputUsername = driver.find_element_by_xpath('//*[@id="email"]')
@@ -53,7 +48,6 @@ def login():
 
 
 def main():
-
     driver.get(WEBSITE_URL)
     login()
     rent = determineRent()
